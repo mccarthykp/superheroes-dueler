@@ -1,6 +1,7 @@
 import random
-from ability import Ability
 from armor import Armor
+from weapon import Weapon
+from ability import Ability
 class Hero:
     def __init__(self, name, starting_health_points = 100, abilities = []):
         self.abilities = abilities
@@ -9,16 +10,19 @@ class Hero:
         self.starting_hp = starting_health_points
         self.current_hp = starting_health_points
 
+    def add_armor(self, armor):
+        ''' Add armor to armors list '''
+        self.armors.append(armor)
 
     def add_ability(self, ability):
         ''' Add ability to abilities list '''
         self.abilities.append(ability)
 
-
-    def add_armor(self, armor):
-        ''' Add armor to armors list '''
-        self.armors.append(armor)
-
+    def add_weapon(self, weapon):
+        ''' Add weapon to abilities list '''
+        # TODO: this method will append the weapon object passed in as an argument to self.abilities
+        # self.abilities will be a list of abilites and weapons
+        self.abilities.append(weapon)
 
     def attack(self):
         total_damage = 0
@@ -125,6 +129,10 @@ if __name__ == '__main__':
     ability_2 = Ability('Great Debugging', 50)
     hero_kevin.add_ability(ability_1)
     hero_kevin.add_ability(ability_2)
+
+    lasso = Weapon('Lasso of Truth', 90)
+    hero_kevin.add_weapon(lasso)
+    print(hero_kevin.attack())
 
     armor_1 = Armor('Good Debugging Shield', 20)
     armor_2 = Armor('Great Debugging Shield', 45)
