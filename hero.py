@@ -9,6 +9,8 @@ class Hero:
         self.name = name
         self.starting_hp = starting_health_points
         self.current_hp = starting_health_points
+        self.deaths = 0
+        self.kills = 0
 
     def add_armor(self, armor):
         ''' Add armor to armors list '''
@@ -23,6 +25,14 @@ class Hero:
         # TODO: this method will append the weapon object passed in as an argument to self.abilities
         # self.abilities will be a list of abilites and weapons
         self.abilities.append(weapon)
+    
+    def add_kill(self, num_kills):
+        ''' Update self.kills by num_kills amount '''
+        self.kills += num_kills
+
+    def add_death(self, num_deaths):
+        ''' Update deaths with num_deaths '''
+        self.deaths += num_deaths
 
     def attack(self):
         total_damage = 0
@@ -103,6 +113,24 @@ class Hero:
         # 3. the hero (self) and their opponent must attack each other and each must take damage from the other's attack
         # 4. after each attack, check if either hero (self) or the opponent is alive. if one has died print "heroname won!" and end the fight loop
 
+        # if len(self.abilities) == 0 and len(opponent.abilities) == 0:
+        #     print("DRAW")
+        #     return
+        # else:
+        #     while self.is_alive() and opponent.is_alive():
+        #         opponent.take_damage(self.attack())
+        #         self.take_damage(opponent.attack())
+        #     if self.is_alive:
+        #         print(f'{self.name} won!')
+        #     else:
+        #         print(f'{opponent.name} won!')
+
+        # TODO: Refacter to update the following:
+        # 1. the number of kills the hero (self) has when the opponent dies.
+        # 2. the number of kills the opponent has when the hero (self) dies.
+        # 3. the number of deaths of the opponent if they die in the fight.
+        # 4. the number of deaths of the hero (self) if they die in the fight.
+
         if len(self.abilities) == 0 and len(opponent.abilities) == 0:
             print("DRAW")
             return
@@ -111,10 +139,13 @@ class Hero:
                 opponent.take_damage(self.attack())
                 self.take_damage(opponent.attack())
             if self.is_alive:
+                self.add_kill(1)
+                opponent.add_death(1)
                 print(f'{self.name} won!')
             else:
+                opponent.add_kill(1)
+                self.add_death(1)
                 print(f'{opponent.name} won!')
-            
 
 
 
@@ -127,8 +158,11 @@ if __name__ == '__main__':
 
     ability_1 = Ability('Good Debugging', 25)
     ability_2 = Ability('Great Debugging', 50)
+    print(len(hero_kevin.abilities))
     hero_kevin.add_ability(ability_1)
     hero_kevin.add_ability(ability_2)
+    print(len(hero_kevin.abilities))
+    print(hero_kevin.abilities[0].name)
 
     lasso = Weapon('Lasso of Truth', 90)
     hero_kevin.add_weapon(lasso)
