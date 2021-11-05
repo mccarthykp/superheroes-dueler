@@ -1,4 +1,3 @@
-import random
 from armor import Armor
 from weapon import Weapon
 from ability import Ability
@@ -60,7 +59,6 @@ class Hero:
             #     total_block = 0
             #     return total_block
 
-
     def take_damage(self, damage):
         ''' Updates self.current_hp to reflect (incoming damage value - defend total_block value) '''
         # TODO: Create a method that updates self.current_hp to (self.current_hp - self.defend(damage))
@@ -77,7 +75,6 @@ class Hero:
             return False
         else:
             return True
-
 
     def fight(self, opponent):
         ''' Current hero will fight opponent hero that is passed in '''
@@ -139,16 +136,16 @@ class Hero:
             while self.is_alive() and opponent.is_alive():
                 opponent.take_damage(self.attack())
                 self.take_damage(opponent.attack())
-            if self.is_alive():
-                self.add_kill(1)
-                opponent.add_death(1)
-                print(f'{self.name} won!')
-            else:
-                opponent.add_kill(1)
-                self.add_death(1)
-                print(f'{opponent.name} won!')
-
-
+                if self.is_alive():
+                    self.add_kill(1)
+                    opponent.add_death(1)
+                    print(f'{self.name} won!')
+                    return
+                else:
+                    opponent.add_kill(1)
+                    self.add_death(1)
+                    print(f'{opponent.name} won!')
+                    return
 
 
 # If you run this file from the terminal
@@ -159,20 +156,15 @@ if __name__ == '__main__':
 
     ability_1 = Ability('Good Debugging', 25)
     ability_2 = Ability('Great Debugging', 50)
-    print(len(hero_kevin.abilities))
     hero_kevin.add_ability(ability_1)
     hero_kevin.add_ability(ability_2)
-    print(len(hero_kevin.abilities))
-    print(hero_kevin.abilities[0].name)
 
     lasso = Weapon('Lasso of Truth', 90)
     hero_kevin.add_weapon(lasso)
-    print(hero_kevin.attack())
 
     armor_1 = Armor('Good Debugging Shield', 20)
     armor_2 = Armor('Great Debugging Shield', 45)
     hero_kevin.add_armor(armor_1)
     hero_kevin.add_armor(armor_2)
-
 
     hero_kevin.fight(hero_juggernaut)
