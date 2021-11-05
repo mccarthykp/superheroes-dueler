@@ -1,6 +1,6 @@
 import random
 from hero import Hero
-class Team():
+class Team:
     def __init__(self, name):
         self.name = name
         self.heroes = []
@@ -66,3 +66,8 @@ class Team():
                 living_heroes.remove(hero)
             else:
                 living_opponents.remove(opponent)
+
+        if len(living_heroes) > 0:
+            print(f'{self.name} won the battle!')
+        else:
+            print(f'{opponent.name} won the battle!')

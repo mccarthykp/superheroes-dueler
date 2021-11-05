@@ -8,7 +8,7 @@ class Hero:
         self.name = name
         self.starting_hp = starting_health_points
         self.current_hp = starting_health_points
-        self.deaths = 0
+        self.deaths = 1
         self.kills = 0
 
     def add_armor(self, armor):
@@ -139,12 +139,12 @@ class Hero:
                 if self.is_alive():
                     self.add_kill(1)
                     opponent.add_death(1)
-                    print(f'{self.name} won!')
+                    print(f'{self.name} won and beat {opponent.name}!')
                     return
                 else:
                     opponent.add_kill(1)
                     self.add_death(1)
-                    print(f'{opponent.name} won!')
+                    print(f'{opponent.name} won and beat {self.name}!')
                     return
 
 
