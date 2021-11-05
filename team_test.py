@@ -234,17 +234,17 @@ def test_armor():
 
 def test_hero_default_health():
     jodie = Hero("Jodie Foster")
-    assert jodie.current_health == 100
+    assert jodie.current_hp == 100
 
 
 def test_hero_init_new_health():
     hero = Hero("Jodie Foster", 600)
-    assert hero.current_health == 600
+    assert hero.current_hp == 600
 
 
 def test_hero_start_health():
     hero = Hero("Jodie Foster", 300)
-    assert hero.starting_health == 300
+    assert hero.starting_hp == 300
 
 
 def test_hero_defense():
@@ -353,11 +353,11 @@ def test_team_attack():
     socks = Armor("Socks", 10)
     athena.add_armor(socks)
     team_two.add_hero(athena)
-    assert team_two.heroes[0].current_health == 100
+    assert team_two.heroes[0].current_hp == 100
 
     team_one.attack(team_two)
 
-    assert team_two.heroes[0].current_health <= 0
+    assert team_two.heroes[0].current_hp <= 0
 
 
 def test_team_attack_kills():
@@ -402,8 +402,8 @@ def test_revive_heroes():
         team_one.add_hero(hero)
 
     for hero in team_one.heroes:
-        hero.current_health == 12
+        hero.current_hp == 12
     team_one.revive_heroes()
 
     for hero in team_one.heroes:
-        assert hero.current_health == 100
+        assert hero.current_hp == 100

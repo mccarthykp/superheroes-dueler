@@ -3,8 +3,8 @@ from armor import Armor
 from weapon import Weapon
 from ability import Ability
 class Hero:
-    def __init__(self, name, starting_health_points = 100, abilities = []):
-        self.abilities = abilities
+    def __init__(self, name, starting_health_points = 100):
+        self.abilities = []
         self.armors = []
         self.name = name
         self.starting_hp = starting_health_points
@@ -41,8 +41,8 @@ class Hero:
             total_damage += ability.attack()
         return total_damage
 
-
-    def defend(self, incoming_damage):
+    def defend(self):
+        # take in incoming_damage
         ''' Calculate the total block amount from all armor blocks. Return total_block: int'''
         total_block = 0
 
@@ -51,23 +51,24 @@ class Hero:
         else:
             for armor in self.armors:
                 total_block += armor.block()
-            # PROBLEM HERE VVVVVV
-            total_block -= incoming_damage
-            if total_block < 0:
-                total_block = incoming_damage
-                return total_block
-            else:
-                total_block = 0
-                return total_block
+            return total_block
+            
+            # if total_block < 0:
+            #     total_block = incoming_damage
+            #     return total_block
+            # else:
+            #     total_block = 0
+            #     return total_block
 
 
     def take_damage(self, damage):
         ''' Updates self.current_hp to reflect (incoming damage value - defend total_block value) '''
         # TODO: Create a method that updates self.current_hp to (self.current_hp - self.defend(damage))
-        self.current_hp -= self.defend(damage)
-        if self.current_hp < 0:
-            self.current_hp = 0
 
+        if damage - self.defend() < 0:
+            return
+        else:
+            self.current_hp -= damage - self.defend()
     
     def is_alive(self):
         ''' Return True or False depending on whether the hero is alive or not '''
@@ -138,7 +139,7 @@ class Hero:
             while self.is_alive() and opponent.is_alive():
                 opponent.take_damage(self.attack())
                 self.take_damage(opponent.attack())
-            if self.is_alive:
+            if self.is_alive():
                 self.add_kill(1)
                 opponent.add_death(1)
                 print(f'{self.name} won!')

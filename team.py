@@ -1,4 +1,8 @@
+import random
 from hero import Hero
+from ability import Ability
+from weapon import Weapon
+from armor import Armor
 
 class Team():
     def __init__(self, name):
@@ -42,7 +46,6 @@ class Team():
 
     def attack(self, other_team):
         ''' Battle each team against each other. '''
-
         living_heroes = []
         living_opponents = []
 
@@ -52,9 +55,19 @@ class Team():
         for hero in other_team.heroes:
             living_opponents.append(hero)
 
-        while len(living_heroes) > 0 and len(living_opponents) > 0:
-            # TODO: Complete the following:
-            # 1. Randomly select living hero from each team (random.choice)
-            # 2. Have the heroes fight each other (use fight method in Hero class)
-            # 3. update the list of living_heroes and living_opponents to reflect the result of the fight
-            pass
+    #     hero_1 = random.choice(living_heroes)
+    #     hero_2 = random.choice(living_opponents)
+
+    #     hero_1.fight(hero_2)
+
+    #     if hero_1.is_alive() == False:
+    #         living_heroes.remove(hero_1)
+    #     else:
+    #         living_opponents.remove(hero_2)
+
+    #     while len(living_heroes) > 0 and len(living_opponents) > 0:
+    #         # TODO: Complete the following:
+    #         # 1. Randomly select living hero from each team (random.choice)
+    #         # 2. Have the heroes fight each other (use fight method in Hero class)
+    #         # 3. update the list of living_heroes and living_opponents to reflect the result of the fight
+    #         pass
