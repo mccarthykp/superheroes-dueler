@@ -1,3 +1,4 @@
+from os import fdopen
 from ability import Ability
 from weapon import Weapon
 from armor import Armor
@@ -113,7 +114,7 @@ class Arena:
         for hero in self.team_one.heroes:
             if hero.deaths == 0:
                 print('survived from ' + self.team_one.name + ': ' + hero.name)
-
+        
         team_two_kills = 0
         team_two_deaths = 1
         for hero in self.team_two.heroes:
@@ -125,12 +126,12 @@ class Arena:
             if hero.deaths == 0:
                 print('survived from ' + self.team_two.name + ': ' + hero.name)
 
-# if __name__ == "__main__":
-#     arena = Arena()
-#     arena.build_team_one()
-#     arena.build_team_two()
-#     arena.team_battle()
-#     arena.show_stats()
+if __name__ == "__main__":
+    arena = Arena()
+    arena.build_team_one()
+    arena.build_team_two()
+    arena.team_battle()
+    arena.show_stats()
 
 # if __name__ == "__main__":
 #     game_is_running = True
